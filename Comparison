@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    char t[] = "Nobody_Noticed_him";
+    char p[] = "him";
+    int m = strlen(p);
+    int n = strlen(t);
+    int i, j;
+
+    for(i = 0; i <= n - m; i++) 
+	{  
+        j = 0;
+        while(j < m && p[j] == t[i + j])
+		{ 
+            j = j + 1;
+        }
+
+        if(j == m) 
+		{  
+			printf("Length of the main string is:%d\n",n);
+			printf("Length of the pattern string is:%d\n",m);
+            printf("Pattern found at index %d\n", i);
+            return 0;  
+        }
+    }
+    return 0;
+}
+-----------------------------------------------------------------------------
+Output:-
+Length of the main string is:18
+Length of the pattern string is:3
+Pattern found at index 15
