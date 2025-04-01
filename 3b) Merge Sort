@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Merge function to merge two sorted subarrays
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    
+    int L[n1], R[n2];
+    
+    // Copy data to temp arrays L[] and R[]
+    for (int i = 0; i < n1; i++) {    
+        L[i] = arr[left + i];
+    }
+    for (int i = 0; i < n2; i++) {
+        R[i] = arr[mid + 1 + i];
+    }
+    
+    int i = 0, j = 0, k = left;
+
+    // Merge the temp arrays back into the original array
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    
+    // Copy remaining elements of L[], if any
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+    
+    // Copy remaining elements of R[], if any
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+// Merge Sort function to recursively split the array
+void mergesort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2; // Prevent overflow
+        
+        // Recursively sort the two halves
+        mergesort(arr, left, mid);
+        mergesort(arr, mid + 1, right);
+        
+        // Merge the sorted halves
+        merge(arr, left, mid, right);
+    }
+}
+
+int main() {
+    int arr[50], n;
+    
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+    
+    printf("Enter the elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    
+    // Call mergesort on the array
+    mergesort(arr, 0, n - 1);
+    
+    // Print the sorted array
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+-------------------------------------------------------------------------------
+Output:-
+Enter the number of elements: 8
+Enter the elements: 7
+8
+5
+6
+3
+4
+2
+1
+Sorted array: 1 2 3 4 5 6 7 8 
