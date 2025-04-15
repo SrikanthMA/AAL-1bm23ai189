@@ -1,0 +1,40 @@
+
+#include <stdio.h>
+
+int main() {
+    int len;
+    printf("Enter the length of the array: ");
+    scanf("%d", &len);
+
+    int A[len]; 
+    int i;
+    printf("Enter array elements: ");
+    for (i = 0; i < len; i++) {
+        scanf("%d", &A[i]);
+    }
+
+    printf("Before insertion Sort: ");
+    for (i = 0; i < len; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+
+    for (i = 1; i < len; i++) {
+        int key = A[i];
+        int j = i - 1;
+
+        while (j >= 0 && A[j] > key) {
+            A[j + 1] = A[j];
+            j--;
+        }
+        A[j + 1] = key;
+    }
+
+    printf("After insertion Sort: ");
+    for (i = 0; i < len; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
